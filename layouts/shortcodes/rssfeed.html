@@ -1,0 +1,13 @@
+{{ with resources.GetRemote (.Get "url") | transform.Unmarshal }}
+  {{ range .channel.item }}
+    {{ $link := .link | plainify | htmlUnescape }}
+    <p>{{ dateFormat "Jan 2, 2006" .pubDate }}</p>
+    <a href="{{ $link }}">
+      <strong>{{ .title | plainify | htmlUnescape }}</strong><br>
+    </a>
+    <p>{{ .description | plainify | htmlUnescape }}</p>
+    <br>
+    <hr>
+  {{ end }}
+{{ end }}
+
